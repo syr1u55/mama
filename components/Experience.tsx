@@ -72,7 +72,8 @@ function FireworksDisplay() {
       const x = (Math.random() - 0.5) * 15;
       const y = (Math.random() - 0.5) * 10;
       const z = (Math.random() - 0.5) * 10 - 5;
-      setFireworks((prev) => [...prev, { id, position: [x, y, z] }].slice(-20)); // Keep last 20
+      const newFirework = { id, position: [x, y, z] as [number, number, number] };
+      setFireworks((prev) => [...prev, newFirework].slice(-20)); // Keep last 20
     }
   });
 
