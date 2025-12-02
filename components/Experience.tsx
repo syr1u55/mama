@@ -29,6 +29,315 @@ function Heart(props: any) {
   );
 }
 
+function Balloon({ position, color, message }: { position: [number, number, number]; color: string; message: string }) {
+  const [showMessage, setShowMessage] = useState(false);
+
+  return (
+    <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.8}>
+      <group position={position}>
+        {/* Balloon body */}
+        <mesh
+          position={[0, 0, 0]}
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowMessage(!showMessage);
+          }}
+          onPointerOver={(e) => (e.object.scale.set(1.2, 1.2, 1.2))}
+          onPointerOut={(e) => (e.object.scale.set(1, 1, 1))}
+        >
+          <sphereGeometry args={[0.4, 32, 32]} />
+          <meshStandardMaterial
+            color={color}
+            emissive={color}
+            emissiveIntensity={0.3}
+            roughness={0.3}
+            metalness={0.5}
+          />
+        </mesh>
+        {/* Balloon knot */}
+        <mesh position={[0, -0.45, 0]} scale={[0.1, 0.15, 0.1]}>
+          <sphereGeometry args={[1, 8, 8]} />
+          <meshStandardMaterial color={color} roughness={0.8} />
+        </mesh>
+        {/* String */}
+        <mesh position={[0, -0.5, 0]}>
+          <cylinderGeometry args={[0.01, 0.01, 1.5, 8]} />
+          <meshStandardMaterial color="#ffffff" />
+        </mesh>
+
+        {/* Message Card */}
+        {showMessage && (
+          <group position={[0, -0.8, 0.5]}>
+            <mesh onClick={(e) => {
+              e.stopPropagation();
+              setShowMessage(false);
+            }}>
+              <planeGeometry args={[2, 1]} />
+              <meshStandardMaterial
+                color="#ffffff"
+                opacity={0.95}
+                transparent
+                side={THREE.DoubleSide}
+              />
+            </mesh>
+            <Text
+              position={[0, 0, 0.01]}
+              fontSize={0.2}
+              color={color}
+              anchorX="center"
+              anchorY="middle"
+              maxWidth={1.8}
+              textAlign="center"
+              lineHeight={1.2}
+            >
+              {message}
+            </Text>
+          </group>
+        )}
+      </group>
+    </Float>
+  );
+}
+
+function SpecialMessageBalloon() {
+  const [showMessage, setShowMessage] = useState(false);
+
+  const message = `Mama there are no words in any language or form of expression that can adequately describe what is in our hearts. You have sacrificed, loved and given unconditionally. Even when you did not have to, you begged, took insults, gave up your own comfort just so that we did not have to experience the bad in the world. You are the greatest human being to us and an asset to the world, a blessing to everyone who is opportuned to meet you. We love you and we pray that as a year is added to your time on this earth, that the Lord's grace never departs from your side, that as His will is done, He will grant you more strength and wisdom all your remaining days here. Happy birthday Oma 🎈`;
+
+  return (
+    <group position={[0, 2, -9]}>
+      {/* Special Golden Balloon */}
+      <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.8}>
+        <mesh
+          onClick={() => setShowMessage(!showMessage)}
+          onPointerOver={(e) => (e.object.scale.set(1.2, 1.2, 1.2))}
+          onPointerOut={(e) => (e.object.scale.set(1, 1, 1))}
+        >
+          <sphereGeometry args={[0.6, 32, 32]} />
+          <meshStandardMaterial
+            color="#ffd700"
+            emissive="#ffd700"
+            emissiveIntensity={0.8}
+            roughness={0.2}
+            metalness={0.8}
+          />
+        </mesh>
+        {/* Balloon knot */}
+        <mesh position={[0, -0.65, 0]} scale={[0.12, 0.18, 0.12]}>
+          <sphereGeometry args={[1, 8, 8]} />
+          <meshStandardMaterial color="#ffd700" roughness={0.8} />
+        </mesh>
+        {/* String */}
+        <mesh position={[0, -0.7, 0]}>
+          <cylinderGeometry args={[0.015, 0.015, 2, 8]} />
+          <meshStandardMaterial color="#ffffff" />
+        </mesh>
+      </Float>
+
+      {/* Message Card */}
+      {showMessage && (
+        <group position={[0, -1, 1]}>
+          <mesh onClick={(e) => { e.stopPropagation(); setShowMessage(false); }}>
+            <planeGeometry args={[6, 8]} />
+            <meshStandardMaterial
+              color="#ffffff"
+              opacity={0.95}
+              transparent
+              side={THREE.DoubleSide}
+            />
+          </mesh>
+          <Text
+            position={[0, 0, 0.01]}
+            fontSize={0.25}
+            color="#000000"
+            anchorX="center"
+            anchorY="middle"
+            maxWidth={5.5}
+            textAlign="center"
+            lineHeight={1.3}
+          >
+            {message}
+          </Text>
+
+        </group>
+      )}
+    </group>
+  );
+}
+
+function LoveYouMamaBalloon({ onClose }: { onClose?: () => void }) {
+  const [showMessage, setShowMessage] = useState(false);
+  const message = `Love you Mama`;
+  return (
+    <group position={[-3, 1, -9]}>
+      {/* Simple Golden Balloon */}
+      <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.8}>
+        <mesh
+          onClick={() => setShowMessage(!showMessage)}
+          onPointerOver={(e) => (e.object.scale.set(1.2, 1.2, 1.2))}
+          onPointerOut={(e) => (e.object.scale.set(1, 1, 1))}
+        >
+          <sphereGeometry args={[0.6, 32, 32]} />
+          <meshStandardMaterial
+            color="#ffd700"
+            emissive="#ffd700"
+            emissiveIntensity={0.8}
+            roughness={0.2}
+            metalness={0.8}
+          />
+        </mesh>
+        {/* Balloon knot */}
+        <mesh position={[0, -0.65, 0]} scale={[0.12, 0.18, 0.12]}>
+          <sphereGeometry args={[1, 8, 8]} />
+          <meshStandardMaterial color="#ffd700" roughness={0.8} />
+        </mesh>
+        {/* String */}
+        <mesh position={[0, -0.7, 0]}>
+          <cylinderGeometry args={[0.015, 0.015, 2, 8]} />
+          <meshStandardMaterial color="#ffffff" />
+        </mesh>
+      </Float>
+
+      {/* Message Card */}
+      {showMessage && (
+        <group position={[0, -1, 1]}>
+          <mesh onClick={(e) => {
+            e.stopPropagation();
+            setShowMessage(false);
+            if (onClose) onClose();
+          }}>
+            <planeGeometry args={[3, 2]} />
+            <meshStandardMaterial
+              color="#ffffff"
+              opacity={0.95}
+              transparent
+              side={THREE.DoubleSide}
+            />
+          </mesh>
+          <Text
+            position={[0, 0, 0.01]}
+            fontSize={0.4}
+            color="#ff1493"
+            anchorX="center"
+            anchorY="middle"
+            maxWidth={2.5}
+            textAlign="center"
+            lineHeight={1.3}
+          >
+            {message}
+            <meshStandardMaterial emissive="#ff1493" emissiveIntensity={0.3} />
+          </Text>
+
+
+        </group>
+      )}
+    </group>
+  );
+}
+
+function AnotherGoldenBalloon({ onClose }: { onClose?: () => void }) {
+  const [showMessage, setShowMessage] = useState(false);
+  const message = `Love you Mama,\nThank you for everything`;
+  return (
+    <group position={[3, 1, -9]}>
+      {/* Simple Golden Balloon */}
+      <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.8}>
+        <mesh
+          onClick={() => setShowMessage(!showMessage)}
+          onPointerOver={(e) => (e.object.scale.set(1.2, 1.2, 1.2))}
+          onPointerOut={(e) => (e.object.scale.set(1, 1, 1))}
+        >
+          <sphereGeometry args={[0.6, 32, 32]} />
+          <meshStandardMaterial
+            color="#ffd700"
+            emissive="#ffd700"
+            emissiveIntensity={0.8}
+            roughness={0.2}
+            metalness={0.8}
+          />
+        </mesh>
+        {/* Balloon knot */}
+        <mesh position={[0, -0.65, 0]} scale={[0.12, 0.18, 0.12]}>
+          <sphereGeometry args={[1, 8, 8]} />
+          <meshStandardMaterial color="#ffd700" roughness={0.8} />
+        </mesh>
+        {/* String */}
+        <mesh position={[0, -0.7, 0]}>
+          <cylinderGeometry args={[0.015, 0.015, 2, 8]} />
+          <meshStandardMaterial color="#ffffff" />
+        </mesh>
+      </Float>
+
+      {/* Message Card */}
+      {showMessage && (
+        <group position={[0, -1, 1]}>
+          <mesh onClick={(e) => {
+            e.stopPropagation();
+            setShowMessage(false);
+            if (onClose) onClose();
+          }}>
+            <planeGeometry args={[4, 2.5]} />
+            <meshStandardMaterial
+              color="#ffffff"
+              opacity={0.95}
+              transparent
+              side={THREE.DoubleSide}
+            />
+          </mesh>
+          <Text
+            position={[0, 0, 0.01]}
+            fontSize={0.35}
+            color="#ff1493"
+            anchorX="center"
+            anchorY="middle"
+            maxWidth={3.5}
+            textAlign="center"
+            lineHeight={1.3}
+          >
+            {message}
+            <meshStandardMaterial emissive="#ff1493" emissiveIntensity={0.3} />
+          </Text>
+
+        </group>
+      )}
+    </group>
+  );
+}
+
+function FloatingBalloons() {
+  const [showFirst, setShowFirst] = useState(true);
+  const [showSecond, setShowSecond] = useState(false);
+
+  const balloons = useMemo(() => {
+    const colors = ['#ff1493', '#ffd700', '#00ffff', '#ff69b4', '#9d4edd', '#00ff00', '#ff4500', '#1e90ff'];
+    const messages = [
+      "We love you!", "Best Mama!", "God Bless You", "You are amazing",
+      "Thank you!", "Happy Birthday!", "Long Life!", "Good Health!",
+      "Joy & Peace", "Our Queen", "Wonderful Mama", "Forever Loved"
+    ];
+    return Array.from({ length: 15 }).map((_, i) => ({
+      position: [
+        (Math.random() - 0.5) * 12,
+        (Math.random() - 0.5) * 8,
+        -8 - Math.random() * 4, // Behind the main text
+      ] as [number, number, number],
+      color: colors[i % colors.length],
+      message: messages[i % messages.length],
+    }));
+  }, []);
+
+  return (
+    <>
+      <SpecialMessageBalloon />
+      {showFirst && <LoveYouMamaBalloon onClose={() => { setShowFirst(false); setShowSecond(true); }} />}
+      {showSecond && <AnotherGoldenBalloon onClose={() => setShowSecond(false)} />}
+      {balloons.map((b, i) => (
+        <Balloon key={i} position={b.position} color={b.color} message={b.message} />
+      ))}
+    </>
+  );
+}
+
 function Firework({ position }: { position: [number, number, number] }) {
   const ref = useRef<THREE.Group>(null);
   const [particles] = useState(() => {
@@ -108,6 +417,49 @@ function FloatingHearts({ count = 30 }: { count?: number }) {
   );
 }
 
+function ScrollingMessage() {
+  const textRef = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+    if (textRef.current) {
+      // Move text upward and backward (Star Wars style)
+      textRef.current.position.y = ((state.clock.elapsedTime * 0.5) % 30) - 15;
+
+      // Reset position when it goes too far
+      if (textRef.current.position.y > 15) {
+        textRef.current.position.y = -15;
+      }
+    }
+  });
+
+  const message = `Best Mama in the world,
+
+I appreciate everything you have done for us
+
+and we wish you
+
+Good health, Long Life
+
+and more years to come`;
+
+  return (
+    <group ref={textRef} position={[0, -15, -10]} rotation={[-0.5, 0, 0]}>
+      <Text
+        fontSize={0.4}
+        color="#ffd700"
+        anchorX="center"
+        anchorY="middle"
+        maxWidth={10}
+        textAlign="center"
+        lineHeight={1.5}
+      >
+        {message}
+        <meshStandardMaterial emissive="#ffd700" emissiveIntensity={0.2} opacity={0.7} transparent />
+      </Text>
+    </group>
+  );
+}
+
 export default function Experience() {
   const groupRef = useRef<THREE.Group>(null);
 
@@ -129,6 +481,26 @@ export default function Experience() {
 
       <FireworksDisplay />
       <FloatingHearts count={30} />
+      <FloatingBalloons />
+      <ScrollingMessage />
+
+      {/* Back side text - "LOVE YOU MAMA" */}
+      <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.4}>
+        <Text
+          position={[0, 0, -10]}
+          rotation={[0, Math.PI, 0]}
+          fontSize={2}
+          color="#ff1493"
+          anchorX="center"
+          anchorY="middle"
+          outlineWidth={0.08}
+          outlineColor="#ff69b4"
+          letterSpacing={0.1}
+        >
+          LOVE YOU MAMA
+          <meshStandardMaterial emissive="#ff1493" emissiveIntensity={0.6} />
+        </Text>
+      </Float>
 
       <group ref={groupRef}>
         <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
