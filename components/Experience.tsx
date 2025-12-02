@@ -531,21 +531,7 @@ export default function Experience() {
           </Text>
         </Float>
 
-        <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.2}>
-          <Text
-            position={[0, -2, 0]}
-            fontSize={0.8}
-            color="#e6b3ff"
-            anchorX="center"
-            anchorY="middle"
-            outlineWidth={0.03}
-            outlineColor="#9d4edd"
-            letterSpacing={0.05}
-          >
-            Patricia Shongotola
-            <meshStandardMaterial emissive="#e6b3ff" emissiveIntensity={0.3} />
-          </Text>
-        </Float>
+
 
         <Float speed={1} rotationIntensity={0.1} floatIntensity={0.1}>
           <Text
